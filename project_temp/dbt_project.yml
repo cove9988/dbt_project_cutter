@@ -1,0 +1,72 @@
+#
+#  Project: {{ project_name }}
+#
+#  Version   Date         Who               Description
+#     1.00   {{ date }}   {{ creator }}     Initial version
+# Project names should contain only lowercase characters and underscores
+# A good package name should reflect your organization's name or the intended use of these models
+
+name: '{{ project_name }}'
+version: '1.0.0'
+config-version: 2
+
+# The following variables are used for Delta Loading. Please do NOT update the values.
+vars:
+  is_delta_load: False
+  delta_load_batch_name: "NA"
+  delta_load_batch_id: -1
+  delta_load_success: success
+  delta_load_started: started
+  delta_load_error: error
+  delta_load_schema: "{% if target.name == 'dev' or target.name == 'ci' or target.name == 'sit' %}{{target.schema}}_cntrl{% else %}cntrl{% endif %}"
+
+# This setting configures which "profile" dbt uses for this project.
+profile: '{{ profile }}'
+
+# These configurations specify where dbt should look for different types of files.
+# The `source-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+source-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+    - "target"
+    - "dbt_modules"
+
+on-run-start: "{{ mu_delta_load_master_control_start() }}"
+on-run-end: 
+    - "{{ mu_delta_load_master_control_complete() }}"
+    - "{{ mu_grant_dependency_schema_access(schemas) }}"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# These settings can be overridden in the individual model files
+# using the `{{ config(...) }}` macro.
+models:
+    {{ project_name }}:
+        # Applies to all models
+        +post-hook: 
+          - "{{ mu_grant_schema_access(this) }}"
+
+        # Default schemas for dbt projects
+        dbt_curated_source:
+            materialized: view
+            schema : curated_source
+
+snapshots:
+    +post-hook: 
+      - "{{ mu_grant_schema_access(this) }}"
+    schema_name:
+      # Development team to add appropriate tags. Example tag given below.
+      # +tags: PC
+  
+
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['{{ project_name }}', 'dbt']

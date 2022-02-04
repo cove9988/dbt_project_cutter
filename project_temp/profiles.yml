@@ -1,0 +1,37 @@
+#
+#  Reserving dbt database profiles
+#
+#  Version   Date         Who          Description
+#     1.00   {{ date }}   {{ creator }}  Initial version
+# 
+
+config:
+      send_anonymous_usage_stats: false
+
+{{ project_name }}:
+  target: ci
+  target: sit
+
+  outputs:
+  # The following targets are for projects
+    ci:
+      type: postgres
+      host: "{{ env_var('ci_host_url') }}"
+      port: "{{ env_var('ci_host_port') }}"
+      dbname: "{{ env_var('CI_TARGET_DATABASE') }}"
+      user: "{{ env_var('CI_ADMIN_USER') }}"
+      password: "{{ env_var('CI_ADMIN_PASSWORD') }}"
+      schema: ci
+      threads: 1
+      keepalives_idle: 0 # default 0, indicating the system default
+
+    sit:
+      type: postgres
+      host: "{{ env_var('sit_host_url') }}"
+      port: "{{ env_var('sit_host_port') }}"
+      dbname: "{{ env_var('CI_TARGET_DATABASE') }}"
+      user: "{{ env_var('CI_ADMIN_USER') }}"
+      password: "{{ env_var('CI_ADMIN_PASSWORD') }}"
+      schema: dbt
+      threads: 1
+      keepalives_idle: 0 # default 0, indicating the system default 
