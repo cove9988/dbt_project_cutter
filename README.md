@@ -21,25 +21,24 @@ python dbt_project_cutter.py
 ## Folder File Sturcture
 project_root_folder/data_domain/project/
 
-                                                   readme.md
-                                                   dbt_project.yml
-                                                   profiles.yml
-                                                   packages.yml
-                                                   dbt_modules/ (this folder copied from master, developer cannot change anything, READONLY)
-                                                   models/
-                                                   models/dbt_curated_source/schema_name/
-                                                                                       _schema_name_source.yml (source list file)
-                                                   snapshots/dbt_curated_source/project_root_folder/
-                                                                                            data_domain/schema_name/sample.sql
-                                                                                            data_domain/schema_name/sample.yml
-                                                   macros/tests/
-                                                                sample.sql
-                                                   macros/other_test/
-                                                                    sample.sql
-                                                   data/
-                                                   archived/
-                                                   logs/ (developer local folder)
-                                                   targets/ (developer local folder)
+                                       --readme.md
+                                       --dbt_project.yml
+                                       --profiles.yml
+                                       --packages.yml
+                                       --dbt_modules/ (this folder copied from master, developer cannot change anything, READONLY)
+                                       models/
+                                       --models/dbt_curated_source/schema_name/                                                                                    _schema_name_source.yml (source list file)
+                                       snapshots/dbt_curated_source/project_root_folder/
+                                                                                       --data_domain/schema_name/sample.sql
+                                                                                       --data_domain/schema_name/sample.yml
+                                       macros/tests/
+                                                   --sample.sql
+                                       macros/other_test/
+                                                    --sample.sql
+                                       data/
+                                       archived/
+                                       logs/ (developer local folder)
+                                       targets/ (developer local folder)
 
 
 ## Steps:
