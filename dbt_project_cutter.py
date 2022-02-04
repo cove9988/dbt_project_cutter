@@ -65,7 +65,7 @@ folders = [
 ]
 
 files = [
-    "lazygit.sh",
+    "lazypush.sh",
     ".gitignore",
     "dbt_project.yml",
     "profiles.yml", "packages.yml",
@@ -101,5 +101,5 @@ for f in files:
 
 cmd = f"git push --set-upstream origin {project_name}"
 os.system(cmd)
-cmd = './lazygit.sh "initial project {project_name}"'
+cmd = './lazypush.sh "initial project {project_name}"'
 os.system(cmd)

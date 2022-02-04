@@ -1,0 +1,25 @@
+{
+    "dbt_project_type": "postgres",
+    "template_version": "0.0.1",
+    "folders":  [
+        "macros/tests/",
+        "logs/",
+        "data/",
+        "archived/",
+        "models/dbt_curated_source/{source_schema}/",
+        "snapshots/dbt_curated_source/",
+        "targets/"
+    ],
+    "files":[
+        "lazypush.sh",
+        ".gitignore",
+        "dbt_project.yml",
+        "profiles.yml", 
+        "packages.yml",
+        "readme.md",
+        "macros/tests/example.sql",
+        "models/dbt_curated_source/schema/_schema.yml",
+        "snapshots/dbt_curated_source/sample.yml",
+        "snapshots/dbt_curated_source/sample.sql"
+    ]
+}
