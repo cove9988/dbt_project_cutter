@@ -11,7 +11,12 @@ def input_dialog():
     data_domain = input('Data Domain (e.g data_domain or new one): ')
     source_schema = input('Source schema (e.g schema_name): ')
     print(
-        f"""\n---------Your Initial Setup----------------\n User Name: {user_name}\nRepo Local Directory: {repo_local_directory}\n DBT Fork URL: {dbt_fork_url}\n Project Name: {project_name}\n Data Domain: {data_domain}\n Source Schema: {source_schema}\n\n""")
+        f"""\n---------Your Initial Setup----------------\n 
+        User Name: {user_name}\nRepo Local Directory: {repo_local_directory}\n 
+        DBT Fork URL: {dbt_fork_url}\n 
+        Project Name: {project_name}\n 
+        Data Domain: {data_domain}\n 
+        Source Schema: {source_schema}\n""")
 
     yn = input('Do you want to execute project initial:(y/n)')
     if yn.lower() != "y":
